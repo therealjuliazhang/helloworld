@@ -9,6 +9,9 @@
         <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
         <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+        <!--link for interactjs-->
+        <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+
 		<!--link for font awesome icons-->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
@@ -20,7 +23,7 @@
         <img src="greyCircle.png" width="7%" align="right" onclick="goNext();"></img>
         
             <div id="container">
-                <img src="Puff.JPG" id="box"></img>
+                <img src="Images/Puff.JPG" id="box"></img>
             </div>
 
         
@@ -43,6 +46,8 @@
              of touch and assign it to box */
             
             box.addEventListener('touchmove', function(e) {
+                                 event.preventDefault();
+                                 
                                  // grab the location of touch
                                  var touchLocation = e.targetTouches[0];
                                  
@@ -55,11 +60,12 @@
                                   when released using touchend event.
                                   This will be the drop position. */
                                  
-                                 box.addEventListener('touchend', function(e) {
-                                                      // current box position.
-                                                      var x = parseInt(box.style.left);
-                                                      var y = parseInt(box.style.top);
-                                                      })
+            box.addEventListener('touchend', function(e) {
+                                 // current box position.
+                                 var x = parseInt(box.style.left);
+                                 var y = parseInt(box.style.top);
+                                 
+                                 })
                                                       
         }
 	</script>
