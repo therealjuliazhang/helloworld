@@ -41,6 +41,13 @@
             // find the element that you want to drag.
             var box = document.getElementById('box');
             
+            //get width and height for future calc.
+            var widthOfImage = box.width;
+            var heightOfImage = box.height;
+            //calculate half of those
+            var halfWidth = widthOfImage/2;
+            var halfHeight = heightOfImage/2;
+            
             /* listen to the touchMove event,
              every time it fires, grab the location
              of touch and assign it to box */
@@ -52,8 +59,8 @@
                                  var touchLocation = e.targetTouches[0];
                                  
                                  // assign box new coordinates based on the touch.
-                                 box.style.left = (touchLocation.pageX - 50) + 'px';
-                                 box.style.top = (touchLocation.pageY - 50) + 'px';
+                                 box.style.left = (touchLocation.pageX - halfWidth) + 'px';
+                                 box.style.top = (touchLocation.pageY - halfHeight) + 'px';
                                  })
                                  
                                  /* record the position of the touch
