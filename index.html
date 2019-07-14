@@ -9,6 +9,7 @@
         <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
         <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
         <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+        
         <!--link for interactjs-->
         <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
 
@@ -23,14 +24,23 @@
         <img src="greyCircle.png" width="7%" align="right" onclick="goNext();"></img>
         
             <div id="container">
-                <img src="Puff.JPG" id="box"></img>
+                <table>
+                    <tr>
+                        <td>
+                            <img src="Puff.JPG" id="box"></img>
+                        </td>
+                        <td>
+                            <span>THE DROP ZONE</span>
+                        </td>
+                    </tr>
+                </table>
             </div>
 
         
         <!--row for kid's name-->
         <div class="row amber accent-4" style="font-size:35px;font-weight:bold">
             <div class="center-align">
-                <span id="preschoolerName">asdf</span>'s Turn
+                <span id="preschoolerName">Aiden</span>'s Turn
             </div>
         </div>
         <!--end body content-->
@@ -79,9 +89,8 @@
     <style>
         #box
         {
-            position:absolute;
-            width:100px;
-            height:100px;
+            position:relative;
+            width:20%;
         }
     </style>
 </html>
