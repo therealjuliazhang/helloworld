@@ -34,7 +34,14 @@
                                 <img src="arrow.png" width="100%"></img>
                             </td>
                             <td width="40%">
-                                <img id="dropZone" src="darkBlueDropZone.png"></img>
+                                <svg id="dZoneContainer">
+                                    <rect id="dropZone" width="300px" height="100px" />
+                                </svg>
+                                <!--
+                                 <img id="dropZone" src="darkBlueDropZone.png"></img>
+                                 -->
+                                
+                                
                             </td>
                         </tr>
                     </tbody>
@@ -64,11 +71,17 @@
             var halfWidth = widthOfImage/2;
             var halfHeight = heightOfImage/2;
             
-            //get coordinates of drop zone
+            //set size of rectangle dropzone
             var dZone = document.getElementById("dropZone");
+            dZone.width = widthOfImage;
+            dZone.height = heightOfImage;
+            
+            //get coordinates of drop zone
+            
             var rectangle = dZone.getBoundingClientRect();
             var dZoneX = rectangle.left;
             var dZoneY = rectangle.top;
+            alert(dZoneX + " "+dZoneY);
             
             
             
@@ -119,12 +132,18 @@
         #box
         {
             position:relative;
-            width:100%;
+            width:80%;
         }
         #dropZone
         {
-            width:100%;
-            height:500%;
+            stroke-width:3;
+            stroke:rgb(0,0,0);
+            fill:rgb(255,255,255);
+        }
+        #dZoneContainer
+        {
+            height:400;
+            width:400;
         }
         .material-icons
         {
