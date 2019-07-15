@@ -49,7 +49,7 @@
         <!--row for kid's name-->
         <div class="row amber accent-4" style="font-size:35px;font-weight:bold">
             <div class="center-align">
-                <span id="preschoolerName">asdf</span>'s Turn
+                <span id="preschoolerName">Aiden</span>'s Turn
             </div>
         </div>
         <!--end body content-->
@@ -102,11 +102,21 @@
                                     &&
                                     ((touchLocation.pageX - halfWidth) <= rectangle.right))
                                  {
-
-                                    {
-                                        document.getElementById("dropZone").style='border:10px solid #64b5f6;';
-                                    }
+                                    if(((touchLocation.pageY - halfHeight)>= rectangle.bottom)
+                                       &&
+                                       ((touchLocation.pageX - halfHeight) <= rectangle.top))
+                                        {
+                                            document.getElementById("dropZone").style='border:10px solid #64b5f6;';
+                                        }
+                                    else
+                                        {
+                                            document.getElementById("dropZone").style='border:10px solid #0d47a1;';
+                                        }
                                  
+                                 }
+                                 else
+                                 {
+                                    document.getElementById("dropZone").style='border:10px solid #0d47a1;';
                                  }
                                  
                                  
