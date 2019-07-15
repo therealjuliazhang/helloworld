@@ -98,9 +98,11 @@
                                  
                                  
                                  //if touch coordinates are within the drop zone, then change colour of dropzone
-                                 if((touchLocation.pageX)>= rectangle.left)
+                                 if(((touchLocation.pageX - halfWidth)>= rectangle.left)
+                                    &&
+                                    ((touchLocation.pageX - halfWidth) <= rectangle.right))
                                  {
-                                    if((touchLocation.pageX) <= rectangle.right)
+
                                     {
                                         document.getElementById("dropZone").style='border:3px solid #64b5f6;';
                                     }
