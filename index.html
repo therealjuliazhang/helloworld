@@ -28,10 +28,10 @@
                     <tbody>
                         <tr>
                             <td width="40%">
-                                <img src="Puff.JPG" id="box"></img>
+                                <img src="Images/Puff.JPG" id="box"></img>
                             </td>
                             <td width="20%">
-                                <img src="arrow.png" width="100%"></img>
+                                <img src="Images/arrow.png" width="100%"></img>
                             </td>
                             <td width="40%" id="dropZone">
                                 <!--
@@ -102,7 +102,7 @@
                                  {
                                     if((touchLocation.pageX - halfWidth) <= rectangle.right)
                                     {
-                                 document.getElementById("dropZone")
+                                        document.getElementById("dropZone").style='border:3px solid #64b5f6;';
                                     }
                                  
                                  }
@@ -131,7 +131,7 @@
         }
         #dropZone
         {
-            border:3px solid black;
+            border:3px solid #0d47a1;
         }
         .material-icons
         {
