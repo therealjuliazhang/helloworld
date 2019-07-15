@@ -28,14 +28,14 @@
                     <tbody>
                         <tr>
                             <td width="40%">
-                                <img src="Puff.JPG" id="box"></img>
+                                <img src="Images/Puff.JPG" id="box"></img>
                             </td>
                             <td width="20%">
-                                <img src="arrow.png" width="100%"></img>
+                                <img src="Images/arrow.png" width="100%"></img>
                             </td>
                             <td width="40%" id="dropZone">
                                 <!--
-                                 <img id="dropZone" src="darkBlueDropZone.png"></img>
+                                 <img id="dropZone" src="Images/darkBlueDropZone.png"></img>
                                  -->
                                 
                             </td>
@@ -48,7 +48,7 @@
         <!--row for kid's name-->
         <div class="row amber accent-4" style="font-size:35px;font-weight:bold">
             <div class="center-align">
-                <span id="preschoolerName">aiden</span>'s Turn
+                <span id="preschoolerName">asdf</span>'s Turn
             </div>
         </div>
         <!--end body content-->
@@ -63,9 +63,7 @@
             //get width and height for future calc.
             var widthOfImage = box.width;
             var heightOfImage = box.height;
-            //calculate half of those
-            var halfWidth = widthOfImage/2;
-            var halfHeight = heightOfImage/2;
+
             //alert("W + H = "+widthOfImage+" "+heightOfImage+"\n1/2 W + H = "+halfWidth+" "+halfHeight);
             
             //set size of rectangle dropzone
@@ -91,15 +89,15 @@
                                  var touchLocation = e.targetTouches[0];
                                  
                                  // assign box new coordinates based on the touch.
-                                 box.style.left = (touchLocation.pageX - halfWidth - halfWidth/3)+'px';
-                                 box.style.top = (touchLocation.pageY - heightOfImage)+'px';
+                                 box.style.left = (touchLocation.pageX - widthOfImage/2)+'px';
+                                 box.style.top = (touchLocation.pageY - heightOfImage/3)+'px';
                                  
                                  
                                  
                                  //if touch coordinates are within the drop zone, then change colour of dropzone
-                                 if(((touchLocation.pageX - halfWidth)>= rectangle.left)
+                                 if(((touchLocation.pageX - widthOfImage/2)>= rectangle.left)
                                     &&
-                                    ((touchLocation.pageX - halfWidth) <= rectangle.right))
+                                    ((touchLocation.pageX - widthOfImage/2) <= rectangle.right))
                                  {
                                  
                                     document.getElementById("dropZone").style='border:10px solid #64b5f6;';
