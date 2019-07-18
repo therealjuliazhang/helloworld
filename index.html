@@ -46,7 +46,7 @@
         <!--row for kid's name-->
         <div class="row amber accent-4" style="font-size:35px;font-weight:bold">
             <div class="center-align">
-                <span id="preschoolerName">Daphne Blake</span>'s Turn
+                <span id="preschoolerName">Velma Dinkley</span>'s Turn
             </div>
         </div>
         <!--end body content-->
@@ -87,8 +87,8 @@
                                  var touchLocation = e.targetTouches[0];
                                  
                                  // assign box new coordinates based on the touch.
-                                 box.style.left = (touchLocation.pageX)+'px';
-                                 box.style.top = (touchLocation.pageY)+'px';
+                                 box.style.left = (touchLocation.pageX - widthOfImage)+'px';
+                                 box.style.top = (touchLocation.pageY - heightOfImage)+'px';
                                  
                                  
                                  
