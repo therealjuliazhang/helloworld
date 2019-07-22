@@ -1,140 +1,152 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
     <head>
-        <title>Drag and Drop Task</title>
-		<!--links for Materialize-->
-        <meta name = "viewport" content = "width = device-width, initial-scale = 1">
-        <link rel = "stylesheet" href = "https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
-        <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-        
-
-		<!--link for font awesome icons-->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta charset="UTF-8">
+            <title>Drag Drop Demo</title>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.2.8/interact.min.js"></script>
+            <style>
+                #outer-dropzone {
+                    height: 140px;
+                }
+            
+            .dropzone {
+                background-color: #ccc;
+                border: dashed 4px transparent;
+                border-radius: 4px;
+                margin: 10px auto 30px;
+                padding: 10px;
+                width: 80%;
+                transition: background-color 0.3s;
+            }
+            
+            .drop-active {
+                border-color: #aaa;
+            }
+            
+            .drop-target {
+                background-color: #29e;
+                border-color: #fff;
+                border-style: solid;
+            }
+            
+            .drag-drop {
+                display: inline-block;
+                min-width: 40px;
+                padding: 2em 0.5em;
+                
+                color: #fff;
+                background-color: #29e;
+                border: solid 2px #fff;
+                
+                -webkit-transform: translate(0px, 0px);
+                transform: translate(0px, 0px);
+                
+                transition: background-color 0.3s;
+            }
+            
+            .drag-drop.can-drop {
+                color: #000;
+                background-color: #4e4;
+            }
+            </style>
     </head>
-
     <body>
-        <!--no header needed for test pages-->
-        <!-- body content -->
 
-        <img src="greyCircle.png" width="7%" align="right" onclick="goNext();"></img>
         
-            <div>
-                <table class="centered">
-                    <tbody>
-                        <tr>
-                            <td width="40%">
-                                <img src="crocodile.jpg" id="box"></img>
-                            </td>
-                            <td width="20%">
-                                <img src="arrow.png" width="100%"></img>
-                            </td>
-                            <td width="40%" id="dropZone">
-                                <!--
-                                 <img id="dropZone" src="darkBlueDropZone.png"></img>
-                                 -->
-                                
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-        <br/>
-        <!--row for kid's name-->
-        <div class="row amber accent-4" style="font-size:35px;font-weight:bold">
-            <div class="center-align">
-                <span id="preschoolerName">Victor</span>'s Turn
-            </div>
+        <div id="yes-drop" class="draggable drag-drop">
+            <img src="Images/crocodile.jpg" width="100px"></img>
         </div>
-        <!--end body content-->
-
-    </body>
-	<script>
         
-        window.onload = function() {
-            // find the element that you want to drag.
-            var box = document.getElementById('box');
+        <div id="outer-dropzone" class="dropzone">
             
-            //get width and height for future calc.
-            var widthOfImage = box.width;
-            var heightOfImage = box.height;
+        </div>
+        
+        
+        <script>
+            // target elements with the "draggable" class
+            interact('.draggable')
+            .draggable({
+                       // enable inertial throwing
+                       inertia: true,
+                       // keep the element within the area of it's parent
+                       restrict: {
+                       restriction: "parent",
+                       endOnly: true,
+                       elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
+                       },
+                       // enable autoScroll
+                       autoScroll: true,
+                       
+                       // call this function on every dragmove event
+                       onmove: dragMoveListener,
+                       // call this function on every dragend event
+                       onend: function (event) {
+                       var textEl = event.target.querySelector('p');
+                       
+                       textEl && (textEl.textContent =
+                                  'moved a distance of '
+                                  + (Math.sqrt(event.dx * event.dx +
+                                               event.dy * event.dy)|0) + 'px');
+                       }
+                       });
+                       
+                       function dragMoveListener (event) {
+                           var target = event.target,
+                           // keep the dragged position in the data-x/data-y attributes
+                           x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+                           y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+                           
+                           // translate the element
+                           target.style.webkitTransform =
+                           target.style.transform =
+                           'translate(' + x + 'px, ' + y + 'px)';
+                           
+                           // update the posiion attributes
+                           target.setAttribute('data-x', x);
+                           target.setAttribute('data-y', y);
+                       }
+        
+        // this is used later in the resizing and gesture demos
+        window.dragMoveListener = dragMoveListener;
+        
+        // enable draggables to be dropped into this
+        interact('.dropzone').dropzone({
+                                       // only accept elements matching this CSS selector
+                                       accept: '#yes-drop',
+                                       // Require a 75% element overlap for a drop to be possible
+                                       overlap: 0.75,
+                                       
+                                       // listen for drop related events:
+                                       
+                                       ondropactivate: function (event) {
+                                       // add active dropzone feedback
+                                       event.target.classList.add('drop-active');
+                                       },
+                                       ondragenter: function (event) {
+                                       var draggableElement = event.relatedTarget,
+                                       dropzoneElement = event.target;
+                                       
+                                       // feedback the possibility of a drop
+                                       dropzoneElement.classList.add('drop-target');
+                                       draggableElement.classList.add('can-drop');
+                                       //draggableElement.textContent = 'Dragged in';
+                                       },
+                                       ondragleave: function (event) {
+                                       // remove the drop feedback style
+                                       event.target.classList.remove('drop-target');
+                                       event.relatedTarget.classList.remove('can-drop');
+                                       //event.relatedTarget.textContent = 'Dragged out';
+                                       },
+                                       ondrop: function (event) {
+                                       //event.relatedTarget.textContent = 'Dropped';
+                                       },
+                                       ondropdeactivate: function (event) {
+                                       // remove active dropzone feedback
+                                       event.target.classList.remove('drop-active');
+                                       event.target.classList.remove('drop-target');
+                                       }
+                                       });
 
-            //alert("W + H = "+widthOfImage+" "+heightOfImage+"\n1/2 W + H = "+halfWidth+" "+halfHeight);
-            
-            //set size of rectangle dropzone
-            var dZone = document.getElementById("dropZone");
-            //get coordinates of drop zone
-            
-            var rectangle = dZone.getBoundingClientRect();
-            var dZoneX = rectangle.left;
-            var dZoneY = rectangle.top;
-            //alert(rectangle.top + " "+rectangle.bottom);
-            
-            
-            
-            
-            /* listen to the touchMove event,
-             every time it fires, grab the location
-             of touch and assign it to box */
-            
-            box.addEventListener('touchmove', function(e) {
-                                 event.preventDefault();
-                                 
-                                 // grab the location of touch
-                                 var touchLocation = e.targetTouches[0];
-                                 
-                                 // assign box new coordinates based on the touch.
-                                 box.style.left = (touchLocation.pageX - widthOfImage/2)+'px';
-                                 box.style.top = (touchLocation.pageY - heightOfImage)+'px';
-                                 
-                                 
-                                 
-                                 //if touch coordinates are within the drop zone, then change colour of dropzone
-                                 if(((touchLocation.pageX - widthOfImage/2)>= rectangle.left)
-                                    &&
-                                    ((touchLocation.pageX - widthOfImage/2) <= rectangle.right))
-                                 {
-                                 
-                                 document.getElementById("dropZone").style='border:10px solid #64b5f6;background-color:#D4D4D4;';
-                                 }
-                                 
-                                 
-                                 })
-                                 
-                                 /* record the position of the touch
-                                  when released using touchend event.
-                                  This will be the drop position. */
-                                 
-            box.addEventListener('touchend', function(e) {
-                                 // current box position.
-                                 var x = parseInt(box.style.left);
-                                 var y = parseInt(box.style.top);
-                                 
-                                 })
-                                                      
-        }
-	</script>
-    <style>
-        #box
-        {
-            position:relative;
-            width:80%;
-        }
-        #dropZone
-        {
-            border:10px solid #0d47a1;
-            background-color:#ffffff;
-        }
-        .material-icons
-        {
-            font-size:200px;
-        }
-        td
-        {
-            height:500px;
-        }
-    </style>
+        </script>
+    </body>
 </html>
