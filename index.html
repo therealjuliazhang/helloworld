@@ -9,21 +9,23 @@
                 background-color: #ccc;
                 border: dashed 4px transparent;
                 border-radius: 4px;
-                margin: 10px auto 30px;
-                padding: 10px;
+                /*margin: 0 auto 0;*/
+				margin-left:220px;
+                padding: 30px;
                 width: 40%;
-                height:300px;
-                transition: background-color 0.5s;
+                height:80%;
+                transition: background-color 1s;
             }
             
             .drop-active {
-                border-color: #aaa;
+                border-color: #9F9F9F;
             }
             
             .drop-target {
-                background-color: #29e;
-                border-color: #fff;
+                background-color: #1976d2;
                 border-style: solid;
+				border-color: #64b5f6;
+                
             }
             
             .drag-drop {
@@ -33,13 +35,11 @@
                 padding: 0.5em 0.5em;
                 
                 color: #fff;
-                background-color: #29e;
-                border: solid 2px #fff;
-                
+				background-color: #1976d2;
                 -webkit-transform: translate(0px, 0px);
                 transform: translate(0px, 0px);
                 
-                transition: background-color 0.3s;
+                transition: background-color 0.5s;
             }
             
             .drag-drop.can-drop {
@@ -58,8 +58,8 @@
                 height:600px;
                 display:flex;
                 align-items:center;
-                border-color: black;
-                border-style:solid;
+                /*border-color: black;
+                border-style:solid;*/
                 
             }
             #yes-drop
@@ -74,34 +74,24 @@
             </style>
     </head>
     <body>
-        <table border="1" width="100%">
-            <tr>
-                <td>
-                    <img id="nextButton" src="greyCircle.png" width="7%" align="right" onclick="goNext();"></img>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div id="wrapper">
-                        <div id="yes-drop" class="draggable drag-drop">
-                            <img src="crocodile.jpg" width="100%"></img>
-                        </div>
-                        
-                        <div id="right" class="dropzone"></div>
-                    </div>
-                </td>
-            </tr>
-        </table>
-
         
-    
-    
+        <img id="nextButton" src="greyCircle.png" width="7%" align="right" onclick="goNext();"></img>
         
+        <div id="wrapper">
+            <div id="yes-drop" class="draggable drag-drop">
+                <img src="crocodile.jpg" width="100%"></img>
+            </div>
+            <div id="right" class="dropzone"></div>
+        </div>
+        <!--
+        <div id="display">false</div>
+        -->
         
         <script>
             //variable to show that drag is true
             var movedCorrectly = false;
             //somehow set this variable to true when drag is true?
+            //set it to true/false depending on whether or not it's in.
             
             // target elements with the "draggable" class
             interact('.draggable')
@@ -146,8 +136,7 @@
                            target.setAttribute('data-y', y);
                        }
         
-        // this is used later in the resizing and gesture demos
-        window.dragMoveListener = dragMoveListener;
+        
         
         // enable draggables to be dropped into this
         interact('.dropzone').dropzone({
@@ -170,6 +159,8 @@
                                        dropzoneElement.classList.add('drop-target');
                                        draggableElement.classList.add('can-drop');
                                        //draggableElement.textContent = 'Dragged in';
+                                       movedCorrectly=true;
+                                       //document.getElementById("display").innerHTML="true";
                                        },
                                        ondragleave: function (event) {
                                        // remove the drop feedback style
