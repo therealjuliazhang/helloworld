@@ -2,18 +2,21 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-            <title>Drag Drop Demo</title>
+            <title>Drag and Drop</title>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.2.8/interact.min.js"></script>
+			<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+			<script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
             <style>
             .dropzone {
                 background-color: #ccc;
                 border: dashed 4px transparent;
                 border-radius: 4px;
-                /*margin: 0 auto 0;*/
-				margin-left:220px;
+				
+				margin-left:auto;
+				margin-right:5px;
                 padding: 30px;
                 width: 40%;
-                height:73%;
+                height:80%;
                 transition: background-color 1s;
             }
             
@@ -36,10 +39,10 @@
                 
                 color: #fff;
 				background-color: #1976d2;
-                -webkit-transform: translate(0px, 0px);
                 transform: translate(0px, 0px);
-                
+                -webkit-transform: translate(0px, 0px);
                 transition: background-color 0.5s;
+				margin-left:5px;
             }
             
             .drag-drop.can-drop {
@@ -58,18 +61,9 @@
                 height:600px;
                 display:flex;
                 align-items:center;
-                /*border-color: black;
-                border-style:solid;*/
                 
             }
-            #yes-drop
-            {
-                float: left;
-            }
-            #right
-            {
-                float:right;
-            }
+            
 
             </style>
     </head>
@@ -81,11 +75,17 @@
             <div id="yes-drop" class="draggable drag-drop">
                 <img src="crocodile.jpg" width="100%"></img>
             </div>
-            <div id="right" class="dropzone"></div>
+            <div class="dropzone"></div>
         </div>
         <!--
         <div id="display">false</div>
         -->
+		<!--row for kid's name-->
+        <div class="row amber accent-4" style="font-size:35px;font-weight:bold">
+            <div class="center-align">
+                <span id="preschoolerName">asdf</span>'s Turn
+            </div>
+        </div>
         
         <script>
             //variable to show that drag is true
@@ -121,6 +121,7 @@
                        });
                        
                        function dragMoveListener (event) {
+						event.preventDefault();
                            var target = event.target,
                            // keep the dragged position in the data-x/data-y attributes
                            x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
