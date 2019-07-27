@@ -5,7 +5,7 @@
             <title>Drag and Drop</title>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.2.8/interact.min.js"></script>
 			<link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
-			<script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+			
             <style>
             .dropzone {
                 background-color: #ccc;
@@ -83,15 +83,23 @@
 		<!--row for kid's name-->
         <div class="row amber accent-4" style="font-size:35px;font-weight:bold">
             <div class="center-align">
-                <span id="preschoolerName">asdf</span>'s Turn
+                <span id="preschoolerName">Victor</span>'s Turn
             </div>
         </div>
         
         <script>
             //variable to show that drag is true
             var movedCorrectly = false;
-            //somehow set this variable to true when drag is true?
             //set it to true/false depending on whether or not it's in.
+			
+			var box = document.getElementById("yes-drop");
+			
+			box.addEventListener('touchmove',function(e)
+				{
+					event.preventDefault();
+				}
+			)
+			
             
             // target elements with the "draggable" class
             interact('.draggable')
@@ -111,7 +119,6 @@
                        onmove: dragMoveListener,
                        // call this function on every dragend event
                        onend: function (event) {
-					   event.preventDefault();
                        var textEl = event.target.querySelector('p');
                        
                        textEl && (textEl.textContent =
@@ -122,7 +129,6 @@
                        });
                        
                        function dragMoveListener (event) {
-						event.preventDefault();
                            var target = event.target,
                            // keep the dragged position in the data-x/data-y attributes
                            x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
