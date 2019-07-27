@@ -73,7 +73,7 @@
         
         <div id="wrapper">
             <div id="yes-drop" class="draggable drag-drop">
-                <img src="crocodile.jpg" width="100%"></img>
+                <img src="Puff.JPG" width="100%"></img>
             </div>
             <div class="dropzone"></div>
         </div>
@@ -111,6 +111,7 @@
                        onmove: dragMoveListener,
                        // call this function on every dragend event
                        onend: function (event) {
+					   event.preventDefault();
                        var textEl = event.target.querySelector('p');
                        
                        textEl && (textEl.textContent =
@@ -149,6 +150,7 @@
                                        // listen for drop related events:
                                        
                                        ondropactivate: function (event) {
+									   
                                        // add active dropzone feedback
                                        event.target.classList.add('drop-active');
                                        },
